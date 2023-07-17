@@ -1,0 +1,48 @@
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+//@title Waklhaus
+//@date 8 June 2023
+//@author Lucas Payr
+
+const LEAD_NOTES =
+  stack(
+    "[<0 2 4 3> <0 2> 1 <-2 -1> ]",
+  )
+const BASS_NOTES =
+  stack(
+    "[<0 2 4 3> <1!2 3 2>](3,4,1)"
+  )
+const DRUM_NOTES =
+  stack(
+    s("bd*2"),
+    s("<hh(2,4,1)!3 [~ hh ~ [~ hh]]>")
+  )
+
+const SCALE = "c:minor"
+
+//Nice synths: 
+// * Bass, SynHarp, SSaw, Organ3, Form1, 
+// * Wobble
+const LEAD = "Bass" 
+const BASS = "Wobble"
+const DRUMS = "RolandTR909"
+
+stack(
+  LEAD_NOTES
+  .scale(SCALE)
+  .scaleTranspose(8)
+  .note()
+  .csound(LEAD)
+  .color("green"),
+  BASS_NOTES
+  .scale(SCALE)
+  .scaleTranspose(-8)
+  .note()
+  .csound(BASS)
+  .gain(1.5)
+  .color("red")
+  ,
+  DRUM_NOTES
+  .bank(DRUMS)
+  .color("white"),
+)
+    .pianoroll({ fold: 1 })

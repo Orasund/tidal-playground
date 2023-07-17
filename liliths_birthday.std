@@ -1,0 +1,40 @@
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+
+const SCALE = "c:phrygian"
+const LEAD =
+  n(`<
+  [~@2 [5 5]]
+  [6 5 8]
+  [7@2 [5 5]]
+  [6 5 9]
+  [8@2 [5 5]]
+  [12 10 8]
+  [7 6 [11 11]]
+  [10 8 9]
+  [8@2 ~]
+  ~!3
+>`)
+
+stack(
+  LEAD
+  .scale(SCALE)
+  .csound("SynHarp")
+  .color("green")
+  .gain(1.5),
+  n("0 -1 1")
+  .add("<-8 -6>")
+  .scale(SCALE)
+  .csound("Bass")
+  .gain(2)
+  .color("red"),
+  stack(
+    s("bd")
+    .color("gray"),
+    s("sd ~ <~@3 sd>")
+    .color("lightGray"),
+    s("~ hh <~ <hh hh*2>>")
+    .color("white")
+  ).bank("RolandTR909")
+)
+.fast(1.25)
+.pianoroll({fold:1})

@@ -1,0 +1,13 @@
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+stack(
+  stack(
+    n("[<0 -2 -1 2>@3 1] [2 1]"),
+    n("<[0,2,4] [2,4,6] [3,4,6] [1,2,5]> <[0 1] [4 3]>")
+  )
+  .scale("c:minor")
+  .csound("Bass"),
+  stack(
+    s("bd ~ bd? bd"),
+    s("<~!2 [hh ~ hh hh ]*2!2>"),
+  ).bank("AkaiMPC60")
+)

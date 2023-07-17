@@ -1,0 +1,33 @@
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+
+const SCALE = "c:minor"
+//Nice synths: 
+// * Bass, SynHarp, SSaw, Organ3, Form1, 
+// * Wobble
+const LEAD = "Bass" 
+const BASS = "Wobble"
+const DRUMS = "RolandTR909"
+
+stack(
+  stack(
+    "[<0 2 4 3> <0 2> 1 <-2 -1> ]",
+  )
+  .scale(SCALE)
+  .scaleTranspose(8)
+  .note()
+  .csound(LEAD)
+  .color("green"),
+  stack(
+    "[<0 2 4 3> <1!2 3 2>](3,4,1)"
+  )
+  .scale(SCALE)
+  .scaleTranspose(-8)
+  .note()
+  .csound(BASS)
+  .color("red"),
+  stack(
+    s("bd hh bd [hh hh?] ")
+  ).bank(DRUMS)
+  .color("white"),
+)
+    .pianoroll({ fold: 1 })
